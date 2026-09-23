@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>digthep – IT-Sicherheit für Arztpraxen, verständlich umgesetzt</title>
+<meta name="description" content="Selbstausfüll-Vorlagen zur KBV-IT-Sicherheitsrichtlinie für Arztpraxen. Praxis-Check: In 3 Fragen herausfinden, welche Anforderungen für Ihre Praxis gelten.">
+<style>
+  :root{
+    --ink:#141413; --paper:#faf9f5; --accent:#184f95; --accent-bg:#e7f1fb;
+    --border:#e1e0d9; --muted:#6d6b67; --ok:#0f7e5c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--paper);}
+  header.site{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;}
+  .logo{font-weight:700;font-size:18px;letter-spacing:-0.01em;}
+  main{max-width:720px;margin:0 auto;padding:0 24px;}
+  .hero{padding:56px 0 32px;}
+  .hero h1{font-size:34px;line-height:1.2;margin:0 0 16px;letter-spacing:-0.01em;}
+  .hero p.lede{font-size:18px;color:var(--muted);margin:0 0 24px;}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:8px;font-weight:600;}
+  .cta:hover{opacity:0.92;}
+  section{padding:40px 0;border-top:1px solid var(--border);}
+  h2{font-size:24px;margin:0 0 16px;}
+  article p{margin:0 0 16px;}
+  .quiz{background:var(--accent-bg);border-radius:12px;padding:28px;}
+  .quiz h2{margin-top:0;}
+  .q{margin-bottom:20px;}
+  .q label{display:block;font-weight:600;margin-bottom:8px;}
+  .q .options{display:flex;gap:10px;flex-wrap:wrap;}
+  .q button.opt{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer;font:inherit;}
+  .q button.opt.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
+  #result{margin-top:20px;padding:18px;border-radius:8px;background:#fff;border:1px solid var(--border);display:none;}
+  #result.show{display:block;}
+  #result ul{margin:8px 0 0;padding-left:20px;}
+  .disclaimer{font-size:13px;color:var(--muted);margin-top:16px;}
+  .leadmagnet{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px;text-align:center;}
+  .leadmagnet input[type=email]{padding:10px 12px;border-radius:8px;border:1px solid var(--border);font:inherit;width:100%;max-width:280px;margin-right:8px;}
+  .leadmagnet form{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px;}
+  footer{max-width:720px;margin:0 auto;padding:32px 24px 64px;color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="logo">digthep</div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>IT-Sicherheit für Ihre Praxis – verständlich statt einschüchternd</h1>
+    <p class="lede">Die KBV-IT-Sicherheitsrichtlinie gilt für jede Vertragsarztpraxis. Wir übersetzen sie in Selbstausfüll-Vorlagen, die Sie ohne IT-Vorkenntnisse direkt umsetzen können.</p>
+    <a class="cta" href="#praxis-check">Praxis-Check starten →</a>
+  </div>
+
+  <section id="artikel">
+    <article>
+      <h2>Warum ein PDF-Häkchen nicht reicht</h2>
+      <p>Viele Praxen behandeln IT-Sicherheit wie ein einmaliges Häkchen auf einer Checkliste: einmal ausgefüllt, abgeheftet, erledigt. Das Problem: Die KBV-IT-Sicherheitsrichtlinie beschreibt keinen Zustand, sondern einen laufenden Prozess. Ein neuer Mitarbeiter ohne Einweisung, ein ungesichertes Backup, ein Passwort, das seit drei Jahren nicht geändert wurde – jede dieser Kleinigkeiten macht aus einer eigentlich erledigten Anforderung wieder eine offene.</p>
+      <p>Das heißt nicht, dass Sie ein aufwändiges IT-Sicherheitsmanagementsystem brauchen. Es heißt, dass die Dokumentation, die Sie einmal erstellen, so gebaut sein sollte, dass sie im Alltag mitwächst: mit Tabellen zum Fortschreiben statt starren Einmal-Texten, mit klaren Verantwortlichkeiten statt vager Absichtserklärungen.</p>
+      <p>Genau dafür haben wir die digthep Compliance Kits entwickelt: Selbstausfüll-Vorlagen, die Sie einmal an Ihre Praxis anpassen und danach mit wenigen Minuten Pflegeaufwand aktuell halten.</p>
+    </article>
+  </section>
+
+  <section id="praxis-check">
+    <div class="quiz">
+      <h2>Praxis-Check: Welche Anforderungen gelten für Sie?</h2>
+      <p>Drei Fragen, keine Anmeldung nötig. Das Ergebnis zeigt Ihnen, welche Anlagen der KBV-IT-Sicherheitsrichtlinie für Ihre Praxis zusätzlich zur Basis-Anlage 1 gelten.</p>
+
+      <div class="q" data-q="staff">
+        <label>Wie viele Mitarbeitende hat Ihre Praxis (inkl. Ärzt:innen)?</label>
+        <div class="options">
+          <button class="opt" data-value="klein">1–5</button>
+          <button class="opt" data-value="mittel">6–20</button>
+          <button class="opt" data-value="gross">21 oder mehr</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="geraete">
+        <label>Nutzen Sie Großgeräte wie CT, MRT oder PET?</label>
+        <div class="options">
+          <button class="opt" data-value="ja">Ja</button>
+          <button class="opt" data-value="nein">Nein</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="ti">
+        <label>Sind TI-Komponenten im Einsatz (Konnektor, Kartenterminal o.ä.)?</label>
+        <div class="options">
+          <button class="opt" data-value="ja">Ja</button>
+          <button class="opt" data-value="nein">Nein</button>
+        </div>
+      </div>
+
+      <div id="result"></div>
+      <p class="disclaimer">Der Praxis-Check ordnet nach den öffentlichen Kriterien der KBV-IT-Sicherheitsrichtlinie zu, welche Anlagen für Praxen Ihrer Größe grundsätzlich gelten. Er ersetzt keine Rechts- oder IT-Sicherheitsberatung und keine individuelle Prüfung Ihrer Praxis.</p>
+    </div>
+  </section>
+
+  <section id="leadmagnet">
+    <div class="leadmagnet">
+      <h2>Kostenlose Vorlage: Backup-Plan für Ihre Praxis</h2>
+      <p>Erhalten Sie eine unserer Vorlagen kostenlos per E-Mail – als Einstieg in Ihre Umsetzung der KBV-Richtlinie.</p>
+      <!-- TODO: MailerLite-Formular-Embed hier einsetzen, sobald Formular angelegt ist -->
+      <form action="#" method="post">
+        <input type="email" name="email" placeholder="ihre@praxis-email.de" required>
+        <button class="cta" type="submit">Vorlage anfordern</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="bundle">
+    <h2>Das komplette Kit 1 „Kleinpraxis Basis“</h2>
+    <p>Alle 8 Vorlagen zur Anlage 1 der KBV-IT-Sicherheitsrichtlinie – Backup-Plan, Passwortrichtlinie, Vertraulichkeitsvereinbarung, Schulungsnachweis, Netzplan, Notfallplan und drei Kurzrichtlinien. Selbstausfüll-Dokumente zur eigenständigen Umsetzung, keine Rechtsberatung.</p>
+    <!-- TODO: Gumroad-Produktlink einsetzen, sobald Bundle live ist -->
+    <a class="cta" href="#" id="gumroad-link">Kit 1 ansehen</a>
+  </section>
+</main>
+
+<footer>
+  digthep · IT-Sicherheits-Vorlagen für Arztpraxen. Alle Inhalte sind Vorlagen zur Selbstumsetzung, keine Rechts- oder IT-Sicherheitsberatung im Einzelfall.
+</footer>
+
+<script>
+(function(){
+  var answers = {};
+  document.querySelectorAll('.q').forEach(function(q){
+    var key = q.dataset.q;
+    q.querySelectorAll('button.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        q.querySelectorAll('button.opt').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        answers[key] = btn.dataset.value;
+        renderResult();
+      });
+    });
+  });
+
+  function renderResult(){
+    if(!answers.staff || !answers.geraete || !answers.ti) return;
+    var anlagen = ['Anlage 1 (Basis, gilt für alle Praxen)'];
+    if(answers.staff === 'mittel' || answers.staff === 'gross'){
+      anlagen.push('Anlage 2 (zusätzlich ab 6 Mitarbeitenden)');
+    }
+    if(answers.staff === 'gross'){
+      anlagen.push('Anlage 3 (zusätzlich ab 21 Mitarbeitenden)');
+    }
+    if(answers.geraete === 'ja'){
+      anlagen.push('Anlage 4 (Großgeräte wie CT/MRT/PET)');
+    }
+    if(answers.ti === 'ja'){
+      anlagen.push('Anlage 5 (TI-Komponenten)');
+    }
+
+    var box = document.getElementById('result');
+    var html = '<strong>Für Ihre Praxis gelten voraussichtlich:</strong><ul>';
+    anlagen.forEach(function(a){ html += '<li>' + a + '</li>'; });
+    html += '</ul>';
+
+    if(answers.staff === 'klein' && answers.geraete === 'nein' && answers.ti === 'nein'){
+      html += '<p style="margin-top:12px;"><strong>Unser Kit 1 „Kleinpraxis Basis“ deckt genau Ihren Fall ab.</strong> <a href="#bundle">Zum Kit →</a></p>';
+    } else {
+      html += '<p style="margin-top:12px;">Kit 1 deckt aktuell Anlage 1 ab. Vorlagen für Anlage 2–5 sind in Vorbereitung – tragen Sie sich unten ein, um informiert zu werden.</p>';
+    }
+
+    box.innerHTML = html;
+    box.classList.add('show');
+  }
+})();
+</script>
+
+</body>
+</html>
