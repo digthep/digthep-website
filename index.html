@@ -41,8 +41,15 @@
   #result ul{margin:8px 0 0;padding-left:20px;}
   .disclaimer{font-size:13px;color:var(--muted);margin-top:16px;}
   .leadmagnet{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px;text-align:center;}
-  .leadmagnet input[type=email]{padding:10px 12px;border-radius:8px;border:1px solid var(--border);font:inherit;width:100%;max-width:280px;margin-right:8px;}
-  .leadmagnet form{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px;}
+  .leadmagnet input[type=email]{padding:10px 12px;border-radius:8px;border:1px solid var(--border);font:inherit;width:100%;max-width:280px;margin-right:8px;background:#fff;color:var(--ink);}
+  .leadmagnet input[type=email]:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .leadmagnet form{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px;align-items:flex-start;}
+  .leadmagnet .cta:disabled{opacity:0.6;cursor:default;}
+  .leadmagnet .honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .leadmagnet .form-msg{width:100%;margin-top:12px;padding:12px 16px;border-radius:8px;font-size:14px;display:none;}
+  .leadmagnet .form-msg.show{display:block;}
+  .leadmagnet .form-msg.success{background:#fff3e0;border:1px solid #f0d9b5;color:#8a5a00;}
+  .leadmagnet .form-msg.error{background:#fce8e6;border:1px solid #f0b5b0;color:var(--critical-text,#b93535);}
   footer{max-width:720px;margin:0 auto;padding:32px 24px 64px;color:var(--muted);font-size:13px;}
 </style>
 </head>
@@ -108,12 +115,59 @@
     <div class="leadmagnet">
       <h2 id="leadmagnet-title">Kostenlose Vorlage: Backup-Plan für Ihre Praxis</h2>
       <p id="leadmagnet-text">Testen Sie unsere Vorlagen unverbindlich: Diese Vorlage schicken wir Ihnen kostenlos per E-Mail – als erster Schritt zur KBV-Richtlinie.</p>
-      <!-- TODO: MailerLite-Formular-Embed hier einsetzen, sobald Formular angelegt ist -->
-      <form action="#" method="post">
-        <input type="email" name="email" placeholder="ihre@praxis-email.de" required>
+      <!--
+        MailerLite-Formular, styleguide-konform von Grund auf selbst gebaut (kein
+        MailerLite-Standard-Widget/iFrame, kein MailerLite-JS/Tracking-Script –
+        bewusst so, damit die Aussage "keine Tracking-Cookies" in der
+        Datenschutzerklärung (Abschnitt 3) korrekt bleibt). Reiner HTML-<form>-POST
+        direkt an MailerLite; die Anzeige von Erfolg/Fehler übernimmt das kleine
+        Inline-Script unten per fetch (MailerLites klassischer Formular-Endpunkt
+        unterstützt AJAX-Submits und liefert JSON zurück).
+
+        Account-ID 2656210 / Formular-ID 199431422719559315 (aus dem von GF
+        gelieferten MailerLite-HTML-Export übernommen).
+      -->
+      <form id="lead-form" action="https://assets.mailerlite.com/jsonp/2656210/forms/199431422719559315/subscribe" method="post">
+        <input type="email" name="fields[email]" placeholder="ihre@praxis-email.de" required>
+        <!-- Honeypot gegen einfache Spam-Bots; für Menschen unsichtbar, MailerLite ignoriert das Feld -->
+        <input type="text" name="fields[website]" class="honeypot" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="ml-submit" value="1">
         <button class="cta" type="submit">Vorlage anfordern</button>
+        <div class="form-msg success" role="status">Danke! Bitte bestätigen Sie die Anmeldung über den Link in der E-Mail, die wir Ihnen gerade geschickt haben.</div>
+        <div class="form-msg error" role="alert">Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an <a href="mailto:adm@digthep.de">adm@digthep.de</a>.</div>
       </form>
       <p class="disclaimer">Selbstausfüll-Vorlage, keine Rechtsberatung. Keine Weitergabe Ihrer Adresse, jederzeit abmeldbar.</p>
+      <script>
+      (function(){
+        var form = document.getElementById('lead-form');
+        if(!form) return;
+        var success = form.querySelector('.form-msg.success');
+        var error = form.querySelector('.form-msg.error');
+        var button = form.querySelector('button.cta');
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          success.classList.remove('show');
+          error.classList.remove('show');
+          button.disabled = true;
+          var originalLabel = button.textContent;
+          button.textContent = 'Wird gesendet …';
+          fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          }).then(function(res){
+            if(!res.ok) throw new Error('request failed');
+            success.classList.add('show');
+            form.reset();
+          }).catch(function(){
+            error.classList.add('show');
+          }).finally(function(){
+            button.disabled = false;
+            button.textContent = originalLabel;
+          });
+        });
+      })();
+      </script>
     </div>
   </section>
 
@@ -122,13 +176,12 @@
     <p>Alle 8 Vorlagen zu den dokumentationspflichtigen Anforderungen aus Anlage 1 der KBV-IT-Sicherheitsrichtlinie in einem Paket: Backup-Plan, Passwortrichtlinie, Vertraulichkeitsvereinbarung, Schulungsnachweis, Netzplan, Notfallplan und drei Kurzrichtlinien. Zum Ausfüllen, nicht zum Selbst-Erfinden – ohne IT-Abteilung, ohne Rechtsberatung.</p>
     <p class="disclaimer">Rein technische Maßnahmen (z. B. Firewall, Virenschutz, Verschlüsselung, Software-Updates) sind nicht Teil dieses Kits und müssen eigenständig bzw. mit Ihrem IT-Dienstleister umgesetzt werden.</p>
     <p style="font-size:22px;font-weight:700;margin:20px 0 12px;">19 € einmalig</p>
-    <!-- TODO: Gumroad-Produktlink einsetzen, sobald Bundle live ist -->
-    <a class="cta" href="#" id="gumroad-link">Kit 1 ansehen</a>
+    <a class="cta" href="https://digadm.gumroad.com/l/digthep" id="gumroad-link" target="_blank" rel="noopener">Kit 1 ansehen</a>
   </section>
 
   <section id="ueber-uns">
     <h2>Über digthep</h2>
-    <p>Ich bin [Name] – gelernter Physiotherapeut, Master of Education in Health Care und seit 15 Jahren in der Digitalisierung des Gesundheitswesens unterwegs. Als Datenschutzbeauftragter kenne ich die Anforderungen an Praxen nicht nur aus der Theorie, sondern aus der praktischen Umsetzung – und weiß, wie wenig Zeit im Praxisalltag für IT-Themen bleibt. digthep ist daraus entstanden: verständliche Vorlagen, die genau da ansetzen, wo Praxen ohne eigene IT-Abteilung tatsächlich stehen.</p>
+    <p>Ich bin Florian Stolte – gelernter Physiotherapeut, Master of Education in Health Care und seit 15 Jahren in der Digitalisierung des Gesundheitswesens unterwegs. Als Datenschutzbeauftragter kenne ich die Anforderungen an Praxen nicht nur aus der Theorie, sondern aus der praktischen Umsetzung – und weiß, wie wenig Zeit im Praxisalltag für IT-Themen bleibt. digthep ist daraus entstanden: verständliche Vorlagen, die genau da ansetzen, wo Praxen ohne eigene IT-Abteilung tatsächlich stehen.</p>
   </section>
 </main>
 
